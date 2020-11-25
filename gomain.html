@@ -1,0 +1,42 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ERROR</title>
+    <link rel="stylesheet" href="default.css" />
+    <link rel="stylesheet" href="mainstyle.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="sanaicon.ico" />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <style>
+        .mainbtn{
+            background: steelblue;
+            color: #fff;
+            padding: 10px 30px;
+            cursor: pointer;
+            display: block;
+            margin: auto;
+        }
+        .imgsrc{
+            margin: auto;
+            display: block;
+        }
+        .logo{
+            text-align: center;
+            margin: 5%;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="logo">사이트를 찾을 수 없습니다..</h1>
+    <img class="imgsrc" src="sadcat.png" onclick="hiddenMSG()"/>
+    <input class="mainbtn" type="button" value="메인으로" onclick="movepage()"/>
+    <script type="text/javascript">
+        function movepage() {
+            location.href = "/main";
+        }
+        function hiddenMSG() {
+            alert("나를 내보내줘");
+        }
+    </script>
+</body>
+</html>

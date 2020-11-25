@@ -1,0 +1,395 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>화상회의</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="author" type="text/html" href="https://plus.google.com/+MuazKhan">
+    <meta name="author" content="Muaz Khan">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="title" content="Video Conferencing" />
+    <meta name="description" content="Video Conferencing using WebRTC." />
+    <meta name="keywords" content="WebRTC, Video Conferencing, Demo, Example, Experiment" />
+    <link rel="stylesheet" href="articlestyle.css">
+    <link rel="shortcut icon" type="image/x-icon" href="sanaicon.ico" />
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="css/chatstyle.css">
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="pdf.js"></script>
+    <script src="pdf.worker.js"></script>
+    <script src="animaition.js"></script>
+    <script src="fabric.js"></script>
+    <script src="drawengin.js"></script>
+
+    <style>
+        .sidenav {
+            height: 100%;
+            width: 250px;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            background-color: steelblue;
+            /*#b7d944*/
+            overflow-x: hidden;
+            float: right;
+            transition: 0.5s ease-in-out;
+            padding-top: 10px;
+            position: absolute;
+        }
+
+        .sidenav a {
+            text-decoration: none;
+            font-size: 25px;
+            color: #fff;
+            display: block;
+            transition: 0.2s ease-in-out;
+            font-family: dotum;
+            font-weight: bold;
+        }
+
+        .sidenav a:hover,
+        .offcanvas a:focus {
+            color: #000;
+        }
+
+        /* 메인 */
+        #main {
+            margin: auto;
+            border-radius: 20px;
+            background-color: #fff;
+            border: 1px #000000;
+            text-align: center;
+            width: 90%;
+            height: 95%;
+        }
+
+        button {
+            font-size: 20px;
+            font-weight: bold;
+            height: 8%;
+            width: 100%;
+            text-align: center;
+            border: 0.5px solid #fff;
+            color: steelblue;
+            background: lightblue;
+            font-weight: bold;
+        }
+
+        button:hover {
+            cursor: pointer;
+        }
+
+        @media screen and (max-height:450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
+
+        .filemenu:hover {
+            color: #000;
+            transition: 0.5s ease-in-out;
+        }
+
+        .filemenu {
+            color: #fff;
+            font-size: 12px;
+            padding: 8px 10px 8px 8px;
+            cursor: pointer;
+            transition: 0.5s ease-in-out;
+            font-family: dotum;
+            font-weight: bold;
+            background: steelblue;
+        }
+
+        .filemenu>i {
+            font-size: 30px;
+        }
+
+        .mainmenu:hover {
+            color: #000;
+            transition: 0.5s ease-in-out;
+        }
+
+        .mainmenu {
+            color: #fff;
+            font-size: 12px;
+            padding: 8px 10px 8px 8px;
+            cursor: pointer;
+            transition: 0.5s ease-in-out;
+            font-family: dotum;
+            font-weight: bold;
+            background: steelblue;
+        }
+
+        .mainmenu>i {
+            font-size: 30px;
+        }
+
+        .setup:hover {
+            color: #000;
+            transition: 0.5s ease-in-out;
+        }
+
+        .setup {
+            color: #fff;
+            font-size: 12px;
+            padding: 8px 10px 8px 8px;
+            cursor: pointer;
+            transition: 0.5s ease-in-out;
+            font-family: dotum;
+            font-weight: bold;
+            background: steelblue;
+        }
+
+        .setup>i {
+            font-size: 30px;
+        }
+
+
+        .off:hover {
+            color: #000;
+            transition: 0.5s ease-in-out;
+        }
+
+        .off {
+            color: #fff;
+            font-size: 12px;
+            padding: 8px 10px 8px 8px;
+            cursor: pointer;
+            transition: 0.5s ease-in-out;
+            font-family: dotum;
+            font-weight: bold;
+            background: steelblue;
+        }
+
+        .off>i {
+            font-size: 30px;
+        }
+
+        .on:hover {
+            color: #000;
+            transition: 0.5s ease-in-out;
+        }
+
+        .on {
+            color: #fff;
+            font-size: 12px;
+            padding: 8px 10px 8px 8px;
+            cursor: pointer;
+            transition: 0.5s ease-in-out;
+            font-family: dotum;
+            font-weight: bold;
+            background: steelblue;
+        }
+
+        .on>i {
+            font-size: 30px;
+        }
+
+        audio,
+        video {
+            -moz-transition: all 1s ease;
+            -ms-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            -webkit-transition: all 1s ease;
+            transition: all 1s ease;
+            vertical-align: top;
+        }
+
+        .experiment input {
+            border: 1px solid #d9d9d9;
+            border-radius: 1px;
+            font-size: 2em;
+            margin: .2em;
+            width: 30%;
+            text-align: center;
+        }
+
+        p {
+            padding: 1em;
+        }
+
+        li {
+            border-bottom: 1px solid rgb(189, 189, 189);
+            border-left: 1px solid rgb(189, 189, 189);
+            padding: .5em;
+        }
+
+        form {
+            padding: 10px 0 0 0;
+        }
+
+        a {
+            border: 1px solid #fff;
+            background: steelblue;
+            color: #fff;
+            font-family: Dotum;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 10px;
+            text-align: center;
+            display: block;
+        }
+
+        header {
+            background: steelblue;
+            color: #fff;
+            font-family: Dotum;
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center;
+            margin: 8px 0;
+        }
+    </style>
+    <script>
+        function filepopup() {
+            var url = "/list"
+            var name = "list";
+            var option = "width = 500, height = 500, top = 100"
+            window.open(url, name, option);
+        }
+    </script>
+    <script type="text/javascript">
+        function gotStream(stream) {
+            window.AudioContext = window.AudioContext || window.webkitAudioContext;
+            var audioContext = new AudioContext();
+
+            // Create an AudioNode from the stream
+            var mediaStreamSource = audioContext.createMediaStreamSource(stream);
+            // Connect it to destination to hear yourself
+            // or any other node for processing!
+            mediaStreamSource.connect(audioContext.destination);
+            var video = document.querySelector('video');
+            var videoTracks = stream.getVideoTracks();
+            window.stream = stream; // make variable available to browser console
+            //video.srcObject = stream;
+        }
+
+        function onfail(error) {
+            console.log("permission not granted or system don't have media devices." + error.name);
+        }
+        //navigator.getUserMedia({ audio: false, video: false }, gotStream, onfail);
+    </script>
+
+    <script src="video.js"></script>
+    <script src="share.js"></script>
+    <script src="https://www.webrtc-experiment.com/socket.io.js"></script>
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="https://www.webrtc-experiment.com/IceServersHandler.js"></script>
+    <script src="https://www.webrtc-experiment.com/CodecsHandler.js"></script>
+    <script src="https://www.webrtc-experiment.com/RTCPeerConnection-v1.5.js"></script>
+    <script src="https://www.webrtc-experiment.com/video-conferencing/conference.js"></script>
+</head>
+
+<body>
+    <span class="filemenu" onclick='openfilelist()'><i class="fa fa-angle-double-left fa-5" aria-hidden="true"></i>
+        파일저장소</span>
+
+    <span class="setup" id="end_room" hidden>회의 종료</span>
+    <span class="setup" id="setup-new-room"> 회의시작</span>
+    <span class="setup" id="share-screen"> 화면공유</span>
+    <span class="mainmenu" onclick='movepage()'><i class="fa fa-angle-double-left fa-5" aria-hidden="true"></i>
+        메인으로</span>
+
+    <span class="setup" id="picture" hidden>그림판</span>
+    <span class="setup" id="returnmen" hidden>되돌리기</span>
+
+    <div id="mysidenav" class="sidenav">
+        <div id="main">
+            <div id="chat">
+            </div>
+        </div>
+    </div>
+    <div id="div_root" style="height: fit-content" hidden>
+
+        <canvas id="canvas" height="1500px" ; width="2000px" ;></canvas>
+
+        <div id="div_menu">
+            <li class="toppen" value="painter">
+                <img id="whatpen" src="style/pencil.png" style="cursor: pointer;">
+                <ul class="subpen">
+                    <li class="selectedpen" value="pen"><img src="style/pencil.png" style="cursor: pointer;"></li>
+                    <li value="brush"><img src="style/paintbrush.png" style="cursor: pointer;"></li>
+                </ul>
+            </li>
+            <li value="text">
+                <img src="style/font.png" style="cursor: pointer;">
+            </li>
+            <li value="eraser">
+                <img src="style/eraser.png" style="cursor: pointer;">
+            </li>
+            <li class="selected" value="pointer">
+                <img src="style/cursor.png" style="cursor: pointer;">
+            </li>
+            <li id="image-button">
+                <img src="style/picture.png" style="cursor: pointer;">
+            </li>
+            <li id="upload-button">
+                <img src="style/document.png" style="cursor: pointer;">
+            </li>
+        </div>
+        <div id="color">
+            <img onclick="change_color('black')" src="style/dot.png" style="cursor: pointer;">
+            <img onclick="change_color('red')" src="style/reddot.png" style="cursor: pointer;">
+            <img onclick="change_color('skyblue')" src="style/bluedot.png" style="cursor: pointer;">
+            <img onclick="change_color('green')" src="style/greendot.png" style="cursor: pointer;">
+            <img onclick="change_color('yellow')" src="style/yellowdot.png" style="cursor: pointer;">
+        </div>
+
+        <input type="file" id="file-to-upload" accept=".pdf,.docx,.pptx,.xlsx,.xls,.doc" />
+        <input type="file" id="image-to-upload" accept=".jpg,.png,.svg" />
+
+        <div id="pdf-meta">
+            <div id="pdf-buttons">
+                <button id="pdf-prev">Previous</button>
+                <button id="pdf-next">Next</button>
+            </div>
+            <div id="page-count-container">
+                Page <div id="pdf-current-page"></div> / <div id="pdf-total-pages"></div>
+            </div>
+            <button id="pdf-clear">clear</button>
+        </div>
+
+        <div id="pdf-main-container">
+            <div id="pdf-contents">
+                <canvas id="pdf-canvas" width="600" height="600"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <section style="height: 100%; width: 100%; position: relative; top: -90px; z-index: 0;">
+        <table style="width: 100%;" id="rooms-list"></table>
+        <div id="videos-container2" class="videocon" style="position:absolute; width: 100%; height: 100%; z-index: 1;">
+        </div>
+        <div id="videos-container" class="videocon" style="position:absolute; width: 100%; height: 100%;"></div>
+    </section>
+    <section>
+        <input name="roomname" type="text" id="conference-name" value="회의실" style=" display: none;">
+    </section>
+
+
+    <script>
+        function openfilelist() {
+            location.href = "javascript:filepopup()"
+        }
+
+        function movepage() {
+            location.href = "/main"
+        }
+    </script>
+
+    <script src="final.js"></script>
+    <script src="https://www.webrtc-experiment.com/commits.js" async></script>
+
+</body>
+
+</html>

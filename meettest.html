@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://www.webrtc-experiment.com/socket.io.js"></script>
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="https://www.webrtc-experiment.com/IceServersHandler.js"></script>
+    <script src="https://www.webrtc-experiment.com/CodecsHandler.js"></script>
+    <script src="https://www.webrtc-experiment.com/RTCPeerConnection-v1.5.js"></script>
+</head>
+<body>
+    <div id="video-container" class="video-con"></div>
+
+    <script>
+        function roomcheck() {
+            socket.emit('connect', {
+                name: Math.round(Math.random() * 999999999) + 999999999,
+                channel = channel || location.href.replace(/\/|:|#|%|\.|\[|\]/g, '')
+            });
+        }
+
+        window.onload = roomcheck();
+    </script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+#div_root {
+    margin: auto;
+    height: 100%;
+    z-index: 1;
+    position: absolute;
+}
+
+#div_menu {
+    margin: auto;
+    width: 342px;
+    height: 55px;
+    position: fixed;
+    top: 34px;
+    left: 40%;
+}
+
+#div_menu li {
+    background-color: steelblue;
+    width: 55px;
+    height: 55px;
+    float: left;
+    border: 1px solid black;
+    list-style-type: none;
+    padding: inherit;
+}
+
+#div_menu img {
+    width: 35px;
+    height: 35px;
+    margin: 10px;
+}
+
+.subpen {
+    width: 250px;
+    display: none;
+    position: relative;
+    list-style-type: none;
+    right: 0px;
+    margin: 0;
+    padding: 0;
+}
+
+.toppen li {
+    float: left;
+    background-color: coral;
+    border: 1px solid black;
+}
+
+#color {
+    position: fixed;
+    top: 35%;
+    background-color: steelblue;
+    width: min-content;
+    height: auto;
+    border-radius: 19px;
+    margin: 3px;
+    padding: 2px;
+}
+
+#color img {
+    width: 40px;
+    height: 40px;
+    margin-left: 2px;
+    margin-top: 2px;
+    padding: inherit;
+}
+
+.selected {
+    background: red !important
+}
+
+.selectedpen {
+    background: blue !important
+}
+
+#image-button {
+    background-color: #829c2c;
+    width: 57px;
+    height: 57px;
+    float: left;
+    border: 1px solid black;
+}
+
+#image-button img {
+    width: 35px;
+    height: 35px;
+    margin: 10px;
+}
+
+/*pdf 부분*/
+#upload-button {
+    background-color: #829c2c;
+    width: 57px;
+    height: 57px;
+    float: left;
+    border: 1px solid black;
+}
+
+#upload-button img {
+    width: 35px;
+    height: 35px;
+    margin: 10px;
+}
+
+#file-to-upload {
+    display: none;
+}
+
+#image-to-upload {
+    display: none;
+}
+
+#pdf-main-container {
+    margin: 20px auto;
+    position: absolute;
+    top: 0%;
+    left: 30%;
+    z-index: -1;
+}
+
+#pdf-loader {
+    display: none;
+    text-align: center;
+    color: #999999;
+    font-size: 13px;
+    line-height: 100px;
+    height: 100px;
+}
+
+#pdf-contents {
+    display: none;
+}
+
+#pdf-meta {
+    display: none;
+    margin: 0 0 20px 0;
+    position: absolute;
+    top: 20px;
+    right: 30%;
+}
+
+#pdf-buttons {
+    float: left;
+}
+
+#page-count-container {
+    float: right;
+}
+
+#pdf-current-page {
+    display: inline;
+}
+
+#pdf-total-pages {
+    display: inline;
+}
+
+#pdf-canvas {
+    border: 1px solid black;
+    box-sizing: border-box;
+}

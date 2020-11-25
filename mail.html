@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>메세지</title>
+    <link rel="stylesheet" href="default.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="sanaicon.ico" />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!--버튼이벤트-->
+    <script>
+        function Receive() {
+            $("#sendmail").hide();
+            $("#remail").show();
+            $("#writemail").hide();
+        }
+        function Send() {
+            $("#sendmail").show();
+            $("#remail").hide();
+            $("#writemail").hide();
+        }
+        function Wirte() {
+            $("#sendmail").hide();
+            $("#remail").hide();
+            $("#writemail").show();
+        }
+    </script>
+    <!-- 폼디스플레이-->
+    <style>
+        #sendmail {
+            display: none;
+        }
+
+        #writemail {
+            display: none;
+        }
+    </style>
+    <!--버튼-->
+    <style>
+        #listBtn button {
+            background: steelblue;
+            color: #fff;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+            #listBtn button:hover {
+                color: #000;
+                transition: 0.2s ease-in-out;
+            }
+
+        #writemail button {
+            background: steelblue;
+            color: #fff;
+            font-size: 15px;
+            padding: 2px 15px;
+            cursor: pointer;
+            display: block;
+            position: absolute;
+            left: 40%;
+        }
+
+            #writemail button:hover {
+                color: #000;
+                transition: 0.2s ease-in-out;
+            }
+    </style>
+</head>
+<body>
+    
+    
+</body>
+</html>

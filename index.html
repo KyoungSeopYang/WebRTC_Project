@@ -1,0 +1,87 @@
+﻿<!-- canvas.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Canvas Painter</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+    <link rel="stylesheet" href="style/style.css">
+
+    <!--pdf-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable=no">
+</head>
+
+<body>
+    <div id="div_root">
+        <canvas id="canvas" height="0px" width="0px"></canvas>
+
+        <div id="div_menu">
+            <li class="toppen" value="painter">
+                <img id="whatpen" src="style/pencil.png">
+                <ul class="subpen">
+                    <li class="selectedpen" value="pen"><img src="style/pencil.png"></li>
+                    <li value="brush"><img src="style/paintbrush.png"></li>
+                </ul>
+            </li>
+            <li value="text">
+                <img src="style/font.png">
+            </li>
+            <li value="eraser">
+                <img src="style/eraser.png">
+            </li>
+            <li class="selected" value="pointer">
+                <img src="style/cursor.png">
+            </li>
+
+            <button id="image-button"><img src="style/picture.png"></button>
+            <button id="upload-button"><img src="style/document.png"></button>
+        </div>
+        <div id="color">
+            <img onclick="change_color('black')" src="style/dot.png">
+            <img onclick="change_color('red')" src="style/reddot.png">
+            <img onclick="change_color('skyblue')" src="style/bluedot.png">
+            <img onclick="change_color('green')" src="style/greendot.png">
+            <img onclick="change_color('yellow')" src="style/yellowdot.png">
+        </div>
+
+        <input type="file" id="file-to-upload" accept=".pdf,.docx,.pptx,.xlsx,.xls,.doc" />
+        <input type="file" id="image-to-upload" accept=".jpg,.png,.svg" />
+        
+        <div id="pdf-meta">
+            <div id="pdf-buttons">
+                <button id="pdf-prev">Previous</button>
+                <button id="pdf-next">Next</button>
+            </div>
+            <div id="page-count-container">Page <div id="pdf-current-page"></div> / <div id="pdf-total-pages"></div>
+            </div>
+        </div>
+
+        <div id="pdf-main-container">
+            <div id="pdf-contents">
+                <canvas id="pdf-canvas" width="600" height="600"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="pdf.js"></script>
+    <script src="pdf.worker.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="animaition.js"></script>
+    <script src="drawengin.js"></script>
+    <script src="fabric.js"></script>
+
+</body>
+
+</html>
